@@ -1,0 +1,874 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #121212;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between; /* Giữ nguyên */
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #f5c518;
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo .logo-img {
+    height: 100%; /* Chiều cao ảnh bằng chiều cao của navbar */
+    max-height: 50px; /* Giới hạn chiều cao tối đa của ảnh */
+    width: auto; /* Giữ tỷ lệ ảnh */
+    object-fit: contain; /* Đảm bảo ảnh không bị méo */
+    margin-left: 10px; /* Khoảng cách giữa text và ảnh */
+    transition: max-height 0.3s ease;
+}
+
+.menu-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; /* Thêm dòng này */
+    margin-left: -120px; /* Điều chỉnh theo kích thước logo */
+}
+
+.main-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+.menu-item {
+    position: relative;
+    text-decoration: none;
+    list-style: none; /* Thêm dòng này */
+}
+
+    .menu-item a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 8px 15px;
+        transition: color 0.3s;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .menu-item a:hover {
+            color: #f5c518;
+        }
+
+    .menu-item i {
+        font-size: 16px;
+    }
+
+.search-item {
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 20px;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2c2c2c;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+    #search-bar:focus {
+        background-color: #fff;
+        color: #000;
+    }
+
+.language-selector select {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    .language-selector select:focus {
+        outline: none;
+    }
+
+.menu-toggle {
+    display: none;
+}
+
+/* Movie Section */
+.movie-section {
+    max-width: 1300px;
+    margin: 100px auto 20px;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #f1c40f;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.movie-card {
+    position: relative;
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+    .movie-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .movie-card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: opacity 0.3s;
+        background-color: #2c2c2c;
+    }
+
+    .movie-card:hover img {
+        opacity: 0.8;
+    }
+
+    .movie-card .info {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .movie-card h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #fff;
+    }
+
+    .movie-card .year {
+        font-size: 12px;
+        color: #bdc3c7;
+    }
+
+    .movie-card .rating {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #f1c40f;
+        color: #1a1a1a;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .movie-card .favorite-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        border: none;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .movie-card .favorite-btn.active {
+            color: red;
+        }
+
+/* Person Card Styles */
+.person-card {
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+    .person-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .person-card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .person-card .info {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .person-card h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .person-card .known-for {
+        font-size: 14px;
+        color: #f5c518;
+    }
+
+/* Pagination */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+    .pagination button {
+        padding: 10px 20px;
+        background-color: #f1c40f;
+        border: none;
+        border-radius: 5px;
+        color: #1a1a1a;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .pagination button:hover {
+            background-color: #d4ac0d;
+        }
+
+        .pagination button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+
+    .pagination span {
+        font-size: 16px;
+        color: #fff;
+    }
+
+#page-selector {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #2c2c2c;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+}
+
+    #page-selector:focus {
+        outline: none;
+        border-color: #f5c518;
+    }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    overflow-y: auto; /* Cho phép cuộn toàn bộ modal */
+    padding: 20px 0;
+}
+
+#movie-modal {
+    z-index: 2000; /* Đảm bảo rõ ràng cho modal chi tiết phim */
+}
+
+#auth-modal {
+    z-index: 3000; /* Modal đăng nhập cao hơn */
+}
+
+.modal-content {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto; /* Căn giữa */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: min-content; /* Chiều cao tối thiểu theo nội dung */
+    gap: 20px;
+}
+
+.modal-main-content {
+    flex: 1;
+    overflow: visible;
+}
+
+#video-player {
+    width: 100%;
+    aspect-ratio: 16/9; /* Tỉ lệ khung hình chuẩn */
+    margin-bottom: 0; /* Xóa khoảng cách dưới để thông tin liền mạch */
+    text-align: center; /* Căn giữa ảnh hoặc text */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#modal-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #f1c40f;
+}
+
+#modal-overview {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.rating-section {
+    margin-bottom: 20px;
+}
+
+#modal-overview p {
+    margin: 10px 0;
+    line-height: 1.8;
+}
+
+#modal-overview strong {
+    color: #f1c40f;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    display: none;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #f1c40f;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error message */
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    display: none;
+}
+
+/* Skeleton loading */
+.skeleton {
+    background-color: #3d3d3d;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .skeleton::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+        animation: shimmer 1.5s infinite;
+    }
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Submenu Styles */
+.has-submenu {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #121212;
+    min-width: 200px;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    list-style: none; /* Thêm dòng này để loại bỏ dấu chấm */
+}
+
+    .submenu li {
+        padding: 0;
+    }
+
+    .submenu a {
+        display: flex;
+        padding: 10px 15px;
+        color: #fff;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+        .submenu a:hover {
+            background-color: #f5c518;
+            color: #121212;
+        }
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .main-menu {
+        gap: 10px;
+    }
+
+    .search-item {
+        margin: 0 10px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .menu-container {
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+
+    .main-menu {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-item {
+        width: 100%;
+    }
+
+    .has-submenu .submenu {
+        position: static;
+        display: none;
+    }
+
+    .has-submenu.active .submenu {
+        display: block;
+    }
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .navbar .logo .logo-img {
+        max-height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .logo {
+        font-size: 24px;
+        margin-right: 15px;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 15px;
+    }
+
+    .movie-card img {
+        height: 180px;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    #video-player {
+        height: 180px;
+    }
+
+    .navbar .logo .logo-img {
+        max-height: 24px;
+    }
+}
+/* Auth Modal Styles */
+.auth-content {
+    max-width: 400px;
+    padding: 30px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+    .auth-form .error-message {
+        color: #ff6b6b;
+        background-color: #2c2c2c;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        border-left: 3px solid #ff6b6b;
+        display: none; /* Ẩn mặc định */
+    }
+
+        .auth-form .error-message.show {
+            display: block; /* Hiển thị khi có lỗi */
+        }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group input {
+        padding: 12px 15px;
+        border: 1px solid #555;
+        border-radius: 4px;
+        background-color: #2c2c2c;
+        color: #fff;
+        font-size: 14px;
+    }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #f5c518;
+        }
+
+.auth-btn {
+    background-color: #f5c518;
+    color: #121212;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .auth-btn:hover {
+        background-color: #d4ac0d;
+    }
+
+.auth-switch {
+    text-align: center;
+    font-size: 14px;
+}
+
+    .auth-switch a {
+        color: #f5c518;
+        text-decoration: none;
+    }
+
+.close-auth {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* User info styles */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 14px;
+    color: #fff;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: #f5c518;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    z-index: 3000;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+    .toast.show {
+        opacity: 1;
+    }
+
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+    .lazy-load.loaded {
+        opacity: 1;
+    }
+/* Đảm bảo các form auth có cùng style */
+#reset-form {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.comments-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-text {
+    line-height: 1.5;
+}
+
+.star-rating {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#video-player {
+    max-height: 40vh;
+}
+
+.star-rating span {
+    color: #777;
+    transition: color 0.2s;
+}
+
+    .star-rating span:hover,
+    .star-rating span.active {
+        color: #f5c518;
+    }
+
+#comments-list {
+    order: 2; /* Danh sách bình luận nằm dưới form */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment {
+    background: #2c2c2c;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.comment-user {
+    font-weight: bold;
+    color: #f5c518;
+}
+
+.comment-time {
+    color: #777;
+}
+
+#comment-text {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical; /* Cho phép chỉnh kích thước theo chiều dọc */
+}
+
+#comments-list {
+    overflow-y: auto; /* Thanh cuộn cho danh sách bình luận */
+    flex: 1;
+}
+
+#comment-form {
+    order: 1; /* Đảm bảo form luôn trên cùng */
+    margin-bottom: 20px;
+}
+
+    #comment-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        background: #2c2c2c;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 4px;
+        min-height: 80px;
+    }
+
+    #comment-form button {
+        background: #f5c518;
+        color: #121212;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+#comment-form {
+    position: sticky;
+    bottom: 0;
+    background: #2c2c2c;
+    padding: 10px 0;
+    z-index: 1;
+}
+
+.person-profile-img {
+    width: 100%;
+    height: auto;
+    max-width: 200px; /* Giới hạn chiều rộng */
+    max-height: 300px; /* Giới hạn chiều cao */
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto; /* Căn giữa ảnh */
+}
+
+.delete-comment-btn {
+    background-color: #e74c3c; /* Màu đỏ */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    transition: background-color 0.3s;
+}
+
+.delete-comment-btn:hover {
+    background-color: #c0392b; /* Màu đỏ đậm hơn khi hover */
+}
+
+#genres-submenu {
+    min-width: 200px;
+    max-height: 300px; /* Giới hạn chiều cao tối đa */
+    overflow-y: auto; /* Bật thanh trượt dọc khi nội dung vượt quá */
+    scrollbar-width: thin; /* Thanh trượt mỏng hơn (cho Firefox) */
+    scrollbar-color: #f5c518 #2c2c2c; /* Màu thanh trượt (cho Firefox) */
+}
+
+/* Tùy chỉnh thanh trượt cho Webkit (Chrome, Safari) */
+#genres-submenu::-webkit-scrollbar {
+    width: 8px; /* Chiều rộng thanh trượt */
+}
+
+#genres-submenu::-webkit-scrollbar-track {
+    background: #2c2c2c; /* Màu nền của track */
+}
+
+#genres-submenu::-webkit-scrollbar-thumb {
+    background: #f5c518; /* Màu của thanh trượt */
+    border-radius: 4px; /* Bo góc thanh trượt */
+}
+
+#genres-submenu::-webkit-scrollbar-thumb:hover {
+    background: #d4ac0d; /* Màu khi hover */
+}
